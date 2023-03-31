@@ -1,0 +1,6 @@
+.appContainer {
+  margin: 0 auto;
+  min-height: 100vh;
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+}
