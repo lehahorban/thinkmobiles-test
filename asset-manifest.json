@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/thinkmobiles-test/static/css/main.597e6ee3.css",
-    "main.js": "/thinkmobiles-test/static/js/main.7d30e392.js",
+    "main.js": "/thinkmobiles-test/static/js/main.47c53532.js",
     "index.html": "/thinkmobiles-test/index.html",
     "main.597e6ee3.css.map": "/thinkmobiles-test/static/css/main.597e6ee3.css.map",
-    "main.7d30e392.js.map": "/thinkmobiles-test/static/js/main.7d30e392.js.map"
+    "main.47c53532.js.map": "/thinkmobiles-test/static/js/main.47c53532.js.map"
   },
   "entrypoints": [
     "static/css/main.597e6ee3.css",
-    "static/js/main.7d30e392.js"
+    "static/js/main.47c53532.js"
   ]
 }
