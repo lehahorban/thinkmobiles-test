@@ -11,6 +11,7 @@ const eventSlice = createSlice({
   initialState: {
     isLoading: false,
     events: [],
+    event: [],
   },
   reducers: {},
   extraReducers: {
@@ -31,7 +32,7 @@ const eventSlice = createSlice({
     },
     [getEventById.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
-      state.events = payload;
+      state.event = payload;
     },
     [getEventById.rejected]: (state, { payload }) => {
       state.isLoading = false;

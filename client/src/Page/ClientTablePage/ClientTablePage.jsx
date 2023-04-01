@@ -7,13 +7,14 @@ const ClientTablePage = ({ clientsArray, eventsArray }) => {
 
   const updateEventCounts = useCallback(() => {
     const counts = {};
-    eventsArray.forEach((event) => {
-      if (counts[event.clientId]) {
-        counts[event.clientId]++;
-      } else {
-        counts[event.clientId] = 1;
-      }
-    });
+    eventsArray &&
+      eventsArray.forEach((event) => {
+        if (counts[event.clientId]) {
+          counts[event.clientId]++;
+        } else {
+          counts[event.clientId] = 1;
+        }
+      });
 
     setEventCounts(counts);
   }, [eventsArray]);
@@ -46,24 +47,21 @@ const ClientTablePage = ({ clientsArray, eventsArray }) => {
           </tr>
         </thead>
         <tbody>
-          {clientsArray.length > 0 &&
-            clientsArray
-              // .slice()
-              // .sort((a, b) => b.firstName.localeCompare(a.firstName))
-              .map((el) => (
-                <tr key={el._id}>
-                  <td>
-                    <NavLink
-                      className={styles.link}
-                      to={`/event/${el._id}`}
-                    >{`${el.firstName} ${el.lastName}`}</NavLink>
-                  </td>
-                  <td>{el.email}</td>
-                  <td>{el.phoneNumber}</td>
-                  <td>{eventCounts[el._id] || 0}</td>
-                  <td>{getNextEventDate(el._id)}</td>
-                </tr>
-              ))}
+          {clientsArray &&
+            clientsArray?.map((el) => (
+              <tr key={el._id}>
+                <td>
+                  <NavLink
+                    className={styles.link}
+                    to={`/event/${el._id}`}
+                  >{`${el.firstName} ${el.lastName}`}</NavLink>
+                </td>
+                <td>{el.email}</td>
+                <td>{el.phoneNumber}</td>
+                <td>{eventCounts[el._id] || 0}</td>
+                <td>{getNextEventDate(el._id)}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
       <NavLink to="/client" className={styles.createEventButton}>

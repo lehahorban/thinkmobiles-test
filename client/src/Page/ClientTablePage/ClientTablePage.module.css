@@ -54,5 +54,7 @@ tbody tr:hover {
 }
 
 .link {
+  font-size: 18px;
+  color: #005ea3;
   text-decoration: none;
 }
