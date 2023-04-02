@@ -55,6 +55,8 @@ const eventSlice = createSlice({
     [deleteEvents.fulfilled]: (state, { payload }) => {
       state.isLoading = false;
       console.log(state.events);
+      state.events = state.events.filter((el) => !payload.includes(el._id));
+      console.log(state.events);
       console.log(payload);
     },
     [deleteEvents.rejected]: (state, { payload }) => {

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createClient } from "../../redux/client/clientOperations";
 import styles from "./ClientForm.module.css";
+import { useSelector } from "react-redux";
 
 const ClientForm = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,8 @@ const ClientForm = () => {
     email: "",
     phoneNumber: "",
   });
+  const userId = useSelector((state) => state.auth.user._id);
+  console.log(userId);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,9 +26,28 @@ const ClientForm = () => {
     }));
   };
 
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const formDataWithUserId = { ...formData, userId };
+  //   console.log(formDataWithUserId);
+  //   dispatch(createClient(formDataWithUserId));
+  //   clearField();
+  //   navigate("/");
+  // };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const formDataWithUserId = { ...formData, user: userId };
+  //   console.log(formDataWithUserId);
+  //   dispatch(createClient(formDataWithUserId));
+  //   clearField();
+  //   navigate("/");
+  // };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(createClient(formData));
+    const formDataWithUserId = { ...formData, userId };
+    console.log(formDataWithUserId);
+    dispatch(createClient(JSON.stringify(formDataWithUserId))); // оберните объект данных в JSON-строку
     clearField();
     navigate("/");
   };

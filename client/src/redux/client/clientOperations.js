@@ -1,5 +1,17 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import api from "../../api/api.js";
+import api from "../../api/authApi.js";
+
+// export const createClient = createAsyncThunk(
+//   "client/createClient",
+//   async (params) => {
+//     try {
+//       const { data } = await api.post("/client", params);
+//       return data;
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   }
+// );
 
 export const createClient = createAsyncThunk(
   "client/createClient",
@@ -25,7 +37,6 @@ export const getClients = createAsyncThunk("client/getClients", async () => {
 export const getClientById = createAsyncThunk(
   "client/getClientById",
   async (id) => {
-    
     try {
       const { data } = await api.get(`/client/${id}`);
       console.log(data);

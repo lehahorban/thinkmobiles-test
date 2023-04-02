@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getEventById, deleteEvents } from "../../redux/event/eventOperations";
 import { getClients } from "../../redux/client/clientOperations";
+import Loading from "../Loading/Loading";
 
 const ClientProfile = () => {
   const { clientId } = useParams();
@@ -15,8 +16,9 @@ const ClientProfile = () => {
 
   const [sortField, setSortField] = useState("startDate");
   const [sortDirection, setSortDirection] = useState("asc");
+  const isLoading = useSelector((state) => state.client.isLoading);
 
-  const events = useSelector((state) => state.event.events).filter(
+  const events = useSelector((state) => state.event.events)?.filter(
     (el) => el !== undefined
   );
   const clientsArray = useSelector((state) => state.client.clients);
@@ -28,7 +30,7 @@ const ClientProfile = () => {
   useEffect(() => {
     dispatch(getEventById(clientId));
     dispatch(getClients());
-  }, [dispatch, clientId, selectedEvents]);
+  }, [dispatch, clientId]);
 
   const formatDate = (date) => {
     const dateObj = new Date(date);
@@ -39,7 +41,7 @@ const ClientProfile = () => {
   };
 
   const formattedArr = events
-    .map((item) => ({
+    ?.map((item) => ({
       ...item,
       startDate: formatDate(item.startDate),
       endDate: formatDate(item.endDate),
@@ -81,7 +83,7 @@ const ClientProfile = () => {
     }
   };
 
-  const sortedEvents = formattedArr.sort((a, b) => {
+  const sortedEvents = formattedArr?.sort((a, b) => {
     const direction = sortDirection === "asc" ? 1 : -1;
 
     if (sortField === "title") {
@@ -98,14 +100,14 @@ const ClientProfile = () => {
   });
 
   const itemsPerPage = 5;
-  const [currentPage, setCurrentPage] = useState(1); // Текущая страница
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const maxPage = Math.ceil(sortedEvents.length / itemsPerPage); // Максимальное количество страниц
+  const maxPage = Math.ceil(sortedEvents?.length / itemsPerPage);
 
-  const startIndex = (currentPage - 1) * itemsPerPage; // Индекс первого элемента на текущей странице
-  const endIndex = startIndex + itemsPerPage; // Индекс последнего элемента на текущей странице
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
 
-  const currentData = sortedEvents.slice(startIndex, endIndex); // Элементы, которые нужно отобразить на текущей странице
+  const currentData = sortedEvents?.slice(startIndex, endIndex);
 
   const handlePageClick = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -123,7 +125,9 @@ const ClientProfile = () => {
     }
   };
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div className={styles.container}>
       <h1 className={styles.title}>
         {userProfile && `${userProfile.firstName} ${userProfile.lastName}`}
@@ -154,9 +158,9 @@ const ClientProfile = () => {
           </tr>
         </thead>
         <tbody>
-          {currentData.length === 0
+          {currentData?.length === 0
             ? ""
-            : currentData.map((event) => (
+            : currentData?.map((event) => (
                 <tr key={event._id}>
                   <td>
                     <input

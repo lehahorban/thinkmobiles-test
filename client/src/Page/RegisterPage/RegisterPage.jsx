@@ -1,14 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./RegisterPage.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { registerUser } from "../../redux/auth/authOperations";
+import { checkIsAuth } from "../../redux/auth/authSelector";
 
 const RegisterPage = () => {
-  const [username, setUsername] = useState("");
+  const [name, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const isAuth = useSelector(checkIsAuth);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isAuth) {
+      navigate("/");
+    }
+  }, [dispatch, isAuth, navigate]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log("Submitted form:", { username, email, password });
+    const userData = { name, email, password };
+    dispatch(registerUser(userData));
+    setUsername("");
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -20,7 +36,7 @@ const RegisterPage = () => {
           <input
             type="text"
             id="username"
-            value={username}
+            value={name}
             onChange={(event) => setUsername(event.target.value)}
           />
         </div>

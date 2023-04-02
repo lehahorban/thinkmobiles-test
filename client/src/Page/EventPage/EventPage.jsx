@@ -12,7 +12,7 @@ const EventPage = ({ handleSubmit }) => {
   const clientId = location.state?.previousEventId;
   const events = useSelector((state) => state.event.events);
   // console.log(events);
-  const filterData = events.filter((el) => {
+  const filterData = events?.filter((el) => {
     const eventStartDate = new Date(el.startDate);
     const eventEndDate = new Date(el.endDate);
     const selectedStartDate = new Date(startDate);
@@ -29,7 +29,7 @@ const EventPage = ({ handleSubmit }) => {
     event.preventDefault();
     const formData = { title, description, startDate, endDate, clientId };
 
-    if (filterData.length > 0) {
+    if (filterData?.length > 0) {
       alert("You can’t create event for this time");
       return;
     }

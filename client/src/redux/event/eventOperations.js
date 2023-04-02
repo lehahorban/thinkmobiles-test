@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import api from "../../api/api.js";
+import api from "../../api/authApi";
 
 export const createEvent = createAsyncThunk(
   "event/createEvent",

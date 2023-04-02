@@ -39,3 +39,12 @@
   background-color: #4caf50;
   color: white;
 }
+
+.usernameWrapp {
+  display: flex;
+}
+
+.usernameSpan {
+  font-weight: 400;
+  font-size: 20px;
+}

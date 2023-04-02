@@ -6,10 +6,6 @@ const clientSlice = createSlice({
   initialState: {
     isLoading: false,
     clients: [],
-    // firstName: "",
-    // lastName: "",
-    // email: "",
-    // phoneNumber: "",
   },
   reducers: {},
   extraReducers: {
