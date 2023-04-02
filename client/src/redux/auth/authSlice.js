@@ -17,6 +17,7 @@ export const authSlice = createSlice({
       state.token = null;
       state.isLoading = false;
       state.status = null;
+      window.localStorage.removeItem("token");
     },
   },
   extraReducers: {
